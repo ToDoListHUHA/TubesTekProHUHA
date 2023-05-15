@@ -21,29 +21,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@Controller // menangani permintaan pada http
 public class TodoItemController {
-    private final Logger logger = LoggerFactory.getLogger(TodoItemController.class);
+    private final Logger logger = LoggerFactory.getLogger(TodoItemController.class); // menyetak pesan log pada TodoItemController
 
-    @Autowired
+    @Autowired // Sebagai perantara antara class dan database
     private TodoItemRepository todoItemRepository;
 
-    @GetMapping("/")
-    public ModelAndView index() {
+    @GetMapping("/") // GetMapping menampilkan alamat link
+    public ModelAndView index() { // sebagai tampilan awal
         logger.info("request to GET index");
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("todoItems", todoItemRepository.findAll());
-        modelAndView.addObject("today", DayOfWeek.from(LocalDate.now())); //diganti agar jadi hari ini atau tepat hari disaat dibukanya
+        modelAndView.addObject("todoItems", todoItemRepository.findAll()); // memanggil semua atribut todoItems
+        modelAndView.addObject("today", DayOfWeek.from(LocalDate.now())); // diganti agar jadi hari ini atau tepat hari disaat dibukanya
         return modelAndView;
     }
 
-    @PostMapping("/todo")
+    @PostMapping("/todo") // PostMapping tidak menampilkan alamat ke link
     public String createTodoItem(@Valid TodoItem todoItem, BindingResult result, Model model) {
         if (result.hasErrors()) { //create
             return "add-todo-item";
         }
 
-        todoItem.setCreatedDate(LocalDate.now());
+        todoItem.setCreatedDate(LocalDate.now()); // mengubah atribut setCreatedDate dengan LocalDate.now
         todoItem.setModifiedDate(LocalDate.now());
         todoItemRepository.save(todoItem);
         return "redirect:/";

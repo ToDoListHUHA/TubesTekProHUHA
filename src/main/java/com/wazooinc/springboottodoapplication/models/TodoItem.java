@@ -18,7 +18,7 @@ import lombok.Setter;
 public class TodoItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) // Implementasi generic programming (enumeration)
     @Getter
     @Setter
     private Long id;
