@@ -1,6 +1,7 @@
 package com.wazooinc.springboottodoapplication.models;
 
-import java.time.Instant;
+// import java.time.Instant;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,19 +34,19 @@ public class TodoItem {
 
     @Getter
     @Setter
-    private Instant createdDate;
+    private LocalDate createdDate; //ubah
 
     @Getter
     @Setter
-    private Instant modifiedDate;
+    private LocalDate modifiedDate;
 
     public TodoItem() {}
 
     public TodoItem(String description) {
         this.description = description;
         this.complete = false;
-        this.createdDate = Instant.now();
-        this.modifiedDate = Instant.now();
+        this.createdDate = LocalDate.now(); //localdate
+        this.modifiedDate = LocalDate.now();
     }
     
     @Override
